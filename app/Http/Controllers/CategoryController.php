@@ -1,0 +1,161 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Category;
+use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
+//use Illuminate\Support\Facades\DB as FacadesDB;
+//use Illuminate\Support\Facades\File;
+
+class CategoryController extends Controller
+{
+    protected $appends = [
+        'getParentsTree'
+    ];
+    public static function getParentsTree($category, $title)
+    {
+        if($category->parent_id == 0){
+            return $title;
+        }
+        $parent = Category::find($category->parent_id);
+        $title = $parent->{'title_'.app()->getLocale()} .' > '.$title;
+        return CategoryController::getParentsTree($parent, $title);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //$mainCategories = Category::where('parent',0)->orWhere('parent',null)->get();
+        //dd($mainCategories);
+        //return view('layouts.user-layout', compact('mainCategories'));
+
+    }
+
+    public function list()
+    {
+        $categories = FacadesDB::table('categories')->orderBy('id', 'desc')->get();
+        $data = Category::all();
+
+        return view('pages.category.list', compact('categories','data'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $data =Category::all();
+        //dd($data);
+        return view('pages.category.create', [
+            'data'=>$data
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'title_en'=>'required|string',
+            'title_ar' =>'required|string',
+            'parent_id'=>'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+         ]);
+         $category = new Category;
+         $category->title_en = $request->title_en;
+         $category->title_ar = $request->title_ar;
+         $category->parent_id = $request->parent_id;
+         $category->activeOrNot = true;
+         //image
+        if($request->file('image')){
+            $image = $request->file('image');
+            $filename = time().'_'.$image->getClientOriginalName();
+            $filename = str_replace(' ','-',$filename);
+
+            $image->move("images/category",$filename); //move to file
+            $category->image = 'category'.'/'.$filename;
+         }
+          $category->save();
+         return redirect()->route('dashboard.mainCategories.list')->with('success', "service updated successfully");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $category = Category::find($id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $data = Category::find($id);
+
+        $datalist =Category::all();
+        //dd($data);
+        return view('pages.category.edit', compact('datalist','data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'title_en'=>'required|string',
+            'title_ar' =>'required|string',
+            'parent_id' =>'required',
+         ]);
+         $data = Category::find($id);
+         $data->title_en = $request->title_en;
+         $data->title_ar = $request->title_ar;
+         $data->parent_id = $request->parent_id;
+         if($request->file('image')){
+            $image = $request->file('image');
+            $filename = time().'_'.$image->getClientOriginalName();
+            $filename = str_replace(' ','-',$filename);
+
+            $image->move("images/category",$filename); //move to file
+            $data->image = 'category'.'/'.$filename;
+         }
+          $data->save();
+         return redirect()->route('dashboard.mainCategories.list')->with('success', "category updated successfully");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect()->route('dashboard.mainCategories.list')->with('success','Service Deleted Successfully');
+    }
+}
