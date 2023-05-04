@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\productColor;
+use App\Models\Category;
+
 class Product extends Model
 {
     use HasFactory;
@@ -18,10 +21,13 @@ class Product extends Model
     {
         return $this->hasMany(ProductColorSize::class,'product_id');
     }
-
+    public function productDetails()
+    {
+        return $this->hasMany(ProductDetail::class,'product_id','id');
+    }
     public function productColor()
     {
-        return $this->hasMany(ProductColor::class, 'product_id');
+        return $this->hasMany(ProductColor::class, 'product_id','id');
     }
     public function productSize()
     {

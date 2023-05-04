@@ -9,7 +9,7 @@
           <div class="carousel-item active" style="height: 500px">
             <img src="../../images/banner-care.jpeg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none2 d-md-block">
-              <h5>Buy unique because you are unique</h5>
+              <h5>@lang('words.Buy unique because you are unique')</h5>
               <p><button class="btn text-white fw-bold fs-2">@lang('words.Shop Now')<i class="fa-solid fa-arrow-right"></i></button> </p>
             </div>
           </div>

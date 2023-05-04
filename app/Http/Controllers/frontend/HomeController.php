@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Product;
 use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\File;
@@ -45,10 +46,12 @@ class HomeController extends Controller
            //echo "=============================<br/>";
 
         }
-        $data =Category::all();
-        $brands = Brand::all();
-
-        return view('main.home', compact('data','maincategories','subcategories', 'brands'));
+        $data =Category::orderBy('id','DESC')->get();
+        $brands = Brand::orderBy('id','DESC')->get();
+        $products = Product::orderBy('id','DESC')->limit(10)->get();
+        $selectforyous = Product::orderBy('id','DESC')->where('selectForYou',1)->get();
+        $cares = Category::select('id','title_en','title_ar','image')->where('parent_id',4)->orderBy('id','DESC')->get();
+        return view('main.home', compact('data','maincategories','subcategories', 'brands','cares', 'products','selectforyous'));
 
     }
 }

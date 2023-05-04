@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB as FacadesDB;
 //use Illuminate\Support\Facades\DB as FacadesDB;
 //use Illuminate\Support\Facades\File;
@@ -40,7 +41,7 @@ class CategoryController extends Controller
     {
         $categories = FacadesDB::table('categories')->orderBy('id', 'desc')->get();
         $data = Category::all();
-
+        //return $categories;
         return view('pages.category.list', compact('categories','data'));
     }
     /**
@@ -69,7 +70,7 @@ class CategoryController extends Controller
             'title_en'=>'required|string',
             'title_ar' =>'required|string',
             'parent_id'=>'required',
-            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
          ]);
          $category = new Category;
          $category->title_en = $request->title_en;
@@ -77,11 +78,11 @@ class CategoryController extends Controller
          $category->parent_id = $request->parent_id;
          $category->activeOrNot = true;
          //image
-        if($request->file('image')){
+         if($request->file('image')){
+
             $image = $request->file('image');
             $filename = time().'_'.$image->getClientOriginalName();
             $filename = str_replace(' ','-',$filename);
-
             $image->move("images/category",$filename); //move to file
             $category->image = 'category'.'/'.$filename;
          }
@@ -129,20 +130,24 @@ class CategoryController extends Controller
             'title_ar' =>'required|string',
             'parent_id' =>'required',
          ]);
-         $data = Category::find($id);
-         $data->title_en = $request->title_en;
-         $data->title_ar = $request->title_ar;
-         $data->parent_id = $request->parent_id;
+         $category = Category::find($id);
+         $category->title_en = $request->title_en;
+         $category->title_ar = $request->title_ar;
+         $category->parent_id = $request->parent_id;
          if($request->file('image')){
+            $destination = 'images/'. $category->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
             $image = $request->file('image');
             $filename = time().'_'.$image->getClientOriginalName();
             $filename = str_replace(' ','-',$filename);
 
-            $image->move("images/category",$filename); //move to file
-            $data->image = 'category'.'/'.$filename;
+            $imagepath = $image->move("images/category",$filename); //move to file
+            $category->image = 'category'.'/'.$filename;
          }
-          $data->save();
-         return redirect()->route('dashboard.mainCategories.list')->with('success', "category updated successfully");
+          $category->save();
+         return redirect()->route('dashboard.mainCategories.list')->with('status', "category updated successfully");
     }
 
     /**
@@ -154,8 +159,12 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        $destination = 'images/'. $category->image;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $category->delete();
 
-        return redirect()->route('dashboard.mainCategories.list')->with('success','Service Deleted Successfully');
+        return redirect()->route('dashboard.mainCategories.list')->with('status','Category Deleted Successfully');
     }
 }

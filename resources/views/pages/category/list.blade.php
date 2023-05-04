@@ -9,8 +9,11 @@
         @endif
         <h1 class="mt-4">List of Categories</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            <li class="breadcrumb-item active">List of Categories</li>
+            <a href="{{ route('dashboard.category.create') }}">
+                <div class="btn btn-primary p-2 bd-highlight">
+                    add new category
+                </div>
+            </a>
         </ol>
 
         <table class="table">
@@ -26,16 +29,16 @@
               </tr>
             </thead>
             <tbody>
-                @if(count($categories) > 0)
+               @if(count($categories) > 0)
                     @foreach ($categories as $index=> $category)
-                        <tr>
+                          <tr>
                             <th scope="">{{$index +1}}</th>
                             <th >@if($category->parent_id== 0)
                                     @lang('words.Main Category')
                                 @else
-                                    {{
-                                    \App\Http\Controllers\CategoryController::getParentsTree($category, $category->{'title_'.app()->getLocale()} )
-                                    }}
+{{
+                                     \App\Http\Controllers\CategoryController::getParentsTree($category, $category->{'title_'.app()->getLocale()} )
+}}
                              @endif </th>
                             <td>{{$category->title_en}}</td>
                             <td>{{$category->title_ar}}</td>
@@ -50,7 +53,7 @@
                                         <form action="{{route('dashboard.category.destroy',["id"=>$category->id])}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="submit" name="submit" value="Delete" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
                                         </form>
                                     </div>
                                 </div>

@@ -14,6 +14,8 @@
 @include('banners.shopping-now')
 @include('slides.best-seller')
 @include('banners.shopping2')
+
+{{-- select for you --}}
 @include('slides.recommended')
 @include('banners.banner-last')
 @include('slides.brand')

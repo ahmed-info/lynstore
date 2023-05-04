@@ -15,29 +15,33 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('title_en');
-            $table->string('title_ar');
-            $table->longText('description_en');
-            $table->longText('description_ar');
-            $table->string('image');
-            $table->integer('brand_id');
-            $table->string('market');
-            $table->string('capacity');
-            $table->string('unit');
-            $table->string('packageCount');
-            $table->boolean('showIsHome');
-            $table->boolean('isBestSeller');
-            $table->boolean('selectForYou');
-            $table->boolean('activeOrNot');
-            $table->integer('supplier_id');
-            $table->string('deliveryTime');
-            $table->string('sku');
-            $table->string('barcode');
-            $table->decimal('mainPrice',8,2)->nullable();
-            $table->decimal('mainPriceDiscount',8,2)->nullable();
-            $table->integer('stock');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->string('title_en'); //
+            $table->string('title_ar');//
+            $table->longText('description_en')->nullable();//
+            $table->longText('description_ar')->nullable();
+            $table->string('image1')->nullable();// image
+            $table->string('image2')->nullable();// image
+            $table->string('image3')->nullable();// image
+            $table->string('image4')->nullable();// image
+            $table->string('image5')->nullable();// image
+            $table->integer('brand_id')->nullable();//
+            $table->string('market')->nullable();//////
+            $table->string('capacity')->nullable();//
+            $table->string('unit')->nullable();//
+            $table->integer('quantity')->nullable();//
+            $table->boolean('showIsHome')->nullable()->default(true);// show is home
+            $table->boolean('isBestSeller')->nullable();////
+            $table->boolean('selectForYou')->nullable()->default(false);// select for you
+            $table->boolean('activeOrNot')->nullable();
+            $table->integer('supplier_id')->nullable();//
+            $table->string('deliveryTime')->nullable();//
+            $table->string('sku')->nullable();//
+            $table->string('barcode')->nullable();//
+            $table->decimal('mainPrice',8,2)->nullable();//
+            $table->decimal('mainPriceDiscount',8,2)->nullable();//
+            $table->integer('stock')->nullable();
+            $table->unsignedBigInteger('category_id');//
+            $table->foreign('category_id')->references('id')->on('categories');//
             $table->timestamps();
             $table->softDeletes();
         });

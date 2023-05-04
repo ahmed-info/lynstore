@@ -13,29 +13,22 @@
      <link href="{{ asset('adminassets/css/simple-line-icons.css') }}" rel="stylesheet">
      <!-- Main styles for this application -->
      <link href="{{ asset('adminassets/dest/style.css') }}" rel="stylesheet">
+     @yield('style')
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  </head>
 
  <body class="navbar-fixed sidebar-nav fixed-nav">
      <header class="navbar">
          <div class="container-fluid">
 
-            
+
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
              <a class="navbar-brand" href="#"></a>
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
                  </li>
-
-                 <!--<li class="nav-item p-x-1">
-                     <a class="nav-link" href="#">داشبورد</a>
-                 </li>
-                 <li class="nav-item p-x-1">
-                     <a class="nav-link" href="#">Users</a>
-                 </li>
-                 <li class="nav-item p-x-1">
-                     <a class="nav-link" href="#">Settings</a>
-                 </li>-->
              </ul>
              <ul class="nav navbar-nav pull-left hidden-md-down">
                  <li class="nav-item">
@@ -89,50 +82,33 @@
                  <li class="nav-title">
                 test header
                  </li>
-                 <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>@lang('words.brands')</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.brands.list') }}"><i class="icon-puzzle"></i>@lang('words.list of brands')</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.brand.create') }}"><i class="icon-puzzle"></i>@lang('words.create brand')</a>
-                        </li>
-
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.suppliers.list') }}"><i class="icon-puzzle"></i>@lang('words.suppliers')</a>
                 </li>
-
-                 <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>@lang('words.categories')</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.mainCategories.list') }}"><i class="icon-puzzle"></i>@lang('words.list of categories')</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.category.create') }}"><i class="icon-puzzle"></i>@lang('words.create category')</a>
-                        </li>
-
-                    </ul>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.brands.list') }}"><i class="icon-puzzle"></i>@lang('words.brands')</a>
                 </li>
-
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>@lang('words.products')</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.products.list') }}"><i class="icon-puzzle"></i>@lang('words.list of products')</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.product.create') }}"><i class="icon-puzzle"></i>@lang('words.create product')</a>
-                        </li>
-
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.mainCategories.list') }}"><i class="icon-puzzle"></i>@lang('words.categories')</a>
                 </li>
-                 <li class="nav-title">
-                   test1
-                 </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#"><i class="icon-docs"></i>test2</a>
-                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.products.list') }}"><i class="icon-puzzle"></i>@lang('words.products')</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.productDetails.list') }}"><i class="icon-puzzle"></i>@lang('words.productDetails')</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.colors.list') }}"><i class="icon-puzzle"></i>@lang('words.productColors')</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.productSizes.list') }}"><i class="icon-puzzle"></i>@lang('words.productSizes')</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.coupons.list') }}"><i class="icon-puzzle"></i>@lang('words.coupons')</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.banners.list') }}"><i class="icon-puzzle"></i>@lang('words.banners')</a>
+                </li>
 
                  <li class="nav-title">
                     test3
@@ -220,6 +196,26 @@
 
      <!-- Grunt watch plugin -->
      <script src="//localhost:35729/livereload.js"></script>
+     <script>
+         $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+     </script>
+     @yield('scripts')
  </body>
 
  </html>

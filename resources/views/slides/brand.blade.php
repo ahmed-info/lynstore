@@ -1,6 +1,6 @@
 <div class="container-flued">
     <div class="heading mt-5 mb-2">
-        <h1 class="">BROWES BY BRAND</h1>
+        <h1 class="">@lang('words.BROWES BY BRAND')</h1>
     </div>
 
     <div class="row g-4 my-5 mx-auto owl-carousel owl-theme">

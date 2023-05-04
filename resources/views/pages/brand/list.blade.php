@@ -10,8 +10,11 @@
         @endif
         <h1 class="mt-4">List of brands</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            <li class="breadcrumb-item active">List of Brands</li>
+            <a href="{{ route('dashboard.brand.create') }}">
+                <div class="btn btn-primary p-2 bd-highlight">
+                    add new brand
+                </div>
+            </a>
         </ol>
 
         <table class="table">
@@ -45,7 +48,8 @@
                                         <form action="{{route('dashboard.brand.destroy',["id"=>$brand->id])}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="submit" name="submit" value="Delete" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
+
                                         </form>
                                     </div>
                                 </div>

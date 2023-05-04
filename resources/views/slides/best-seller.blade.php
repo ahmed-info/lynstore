@@ -1,6 +1,6 @@
 <div class="container-flued">
     <div class="heading mt-5 mb-1">
-        <h1 class="">BEST SELLER</h1>
+        <h1 class="">@lang('words.BEST SELLER')</h1>
     </div>
 
     <div class="row g-4 my-5 mx-auto owl-carousel owl-theme">

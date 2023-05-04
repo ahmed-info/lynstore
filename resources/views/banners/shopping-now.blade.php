@@ -11,21 +11,21 @@
           <div class="carousel-item active" style="height: 500px">
             <img src="../../images/banner1.jpeg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none2 d-md-block">
-              <h5>Buy unique because you are unique</h5>
+              <h5>@lang('words.Buy unique because you are unique')</h5>
               <p><button class="btn text-white fw-bold fs-2">@lang('words.Shop Now')<i class="fa-solid fa-arrow-right"></i></button> </p>
             </div>
           </div>
           <div class="carousel-item" style="height: 500px">
             <img src="../../images/banner2.jpeg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Buy unique because you are unique</h5>
+                <h5>@lang('words.Buy unique because you are unique')</h5>
                 <p><button class="btn text-dark fw-bold fs-2">@lang('words.Shop Now')<i class="fa-solid fa-arrow-right"></i></button> </p>
             </div>
           </div>
           <div class="carousel-item" style="height: 500px">
             <img src=".../../images/banner3.jpeg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Buy unique because you are unique</h5>
+                <h5>@lang('words.Buy unique because you are unique')</h5>
                 <p><button class="btn text-dark fw-bold fs-2">@lang('words.Shop Now')<i class="fa-solid fa-arrow-right"></i></button> </p>
             </div>
           </div>

@@ -72,6 +72,7 @@ class BrandController extends Controller
          }
           $brand->save();
          return redirect()->route('dashboard.brands.list')->with('status', "brand created successfully");
+
     }
 
     /**
@@ -94,8 +95,6 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::find($id);
-
-        //dd($data);
         return view('pages.brand.edit', compact('brand'));
     }
 
@@ -120,7 +119,6 @@ class BrandController extends Controller
 
          if($request->file('imageLogo')){
             $destination = 'images/'. $brand->imageLogo;
-            //return $destination;
             if(File::exists($destination)){
                 File::delete($destination);
             }
@@ -145,7 +143,7 @@ class BrandController extends Controller
          }
           $brand->update();
           $request->session()->flash('status','The Brand created successfully');
-         return redirect()->route('dashboard.brands.list')->with('status', "category updated successfully");
+         return redirect()->route('dashboard.brands.list')->with('status', "brand updated successfully");
     }
 
     /**

@@ -68,7 +68,7 @@
 
     <form class="d-flex search-bar">
         <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
-        <input class="input-search" type="search" placeholder="Search" aria-label="Search">
+        <input class="input-search" type="search" placeholder="  @lang('words.Search')" aria-label="Search">
 
         <ul class="navbar-nav combo-search d-flex" >
             <li class="nav-item dropdown ">
