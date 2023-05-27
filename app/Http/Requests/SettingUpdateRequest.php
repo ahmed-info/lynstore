@@ -13,7 +13,7 @@ class SettingUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,12 +24,13 @@ class SettingUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone'=>'number',
+            'phone'=>'string',
             'whatsapp'=>'string',
             'tiktok'=>'string',
             'youtube'=>'string',
             'facebook'=>'string',
             'instagram'=>'string',
+            'exchange_rate'=>'numeric',
         ];
     }
 }

@@ -234,6 +234,19 @@
                 </div>
             </div>
 
+            <div class="form-group col-md-3 mt-3">
+                <div class="form-group mb-5">
+                    <label for="mainPriceDiscount">
+                        <h4>Origin Country</h4>
+                    </label>
+                    <input type="text"  class="form-control" id="originCountry" name="originCountry" value="{{ $product->originCountry}}"
+                        placeholder="Enter Origin Country">
+                    @error('originCountry')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
             <div class="form-group col-md-2 mt-3">
                 <h3>Image 1</h3>
                 <!-- asset('assets/img/header-bg.jpg') -->

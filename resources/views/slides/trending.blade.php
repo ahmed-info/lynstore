@@ -1,0 +1,2 @@
+{{-- trending livewire --}}
+<livewire:trending />

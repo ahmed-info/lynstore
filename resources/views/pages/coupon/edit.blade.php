@@ -60,7 +60,7 @@
             <div class="form-group col-md-3 mt-3">
                 <div class="form-group mb-5">
                     <label for="start_date"><h4>Start Date</h4></label>
-                    <input type="text" class="form-control" id="start_date" name="start_date" value="{{ old('start_date', $coupon->start_date->format('Y-m-d') )}}" placeholder="Enter start date*">
+                    <input type="date" class="form-control" id="start_date" name="start_date" value="{{ old('start_date', $coupon->start_date->format('Y-m-d') )}}" placeholder="Enter start date*">
                     @error('start_date')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -72,10 +72,10 @@
             <div class="form-group col-md-3 mt-3">
                 <div class="form-group mb-5">
                     <label for="code"><h4>Expire Date</h4></label>
-                    <input type="text" class="form-control" id="expire_date" name="expire_date" value="{{ old('expire_date',$coupon->expire_date->format('Y-m-d')) }}" placeholder="Enter Expire Date">
+                    <input type="date" class="form-control" id="expire_date" name="expire_date" value="{{ old('expire_date',$coupon->expire_date->format('Y-m-d')) }}" placeholder="Enter Expire Date">
                     @error('expire_date')
                     <span class="text-danger">{{ $message }}</span>
-                @enderror
+                    @enderror
                 </div>
             </div>
 

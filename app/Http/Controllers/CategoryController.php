@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Brand;
 use DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB as FacadesDB;
@@ -96,9 +97,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
+        return "category  ". $id;
+        $maincategories = Category::select('id','title_en','title_ar','image')->where('parent_id',0)->orWhere('parent_id',null)->get();
+        $subcategories = Category::select('parent_id','title_en','title_ar','image')->where('parent_id','<>',0)->orderBy('parent_id','asc')->get();
+        $brands = Brand::all();
         $category = Category::find($id);
+        //dd($category);
+        return view('category.show', compact('maincategories', 'subcategories','brands','category'));
     }
 
     /**

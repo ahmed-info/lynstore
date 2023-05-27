@@ -10,7 +10,7 @@
             <div class="product-img">
                 <img src="{{ asset('images').'/'. $selectyou->image1 }}" alt="" class="img-flued d-block mx-auto">
                 <span class="heart-icon">
-                    <i class="far fa-heart"></i>
+                    <i class="fas fa-heart"></i>
                 </span>
                 <div class="row btns w-100 mx-auto text-center">
                     <button type="button" class="col-6 py-2">

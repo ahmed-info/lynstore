@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productColor;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Brand;
+use App\Models\Banner;
+use App\Models\Supplier;
 
 class Product extends Model
 {
@@ -21,9 +25,17 @@ class Product extends Model
     {
         return $this->hasMany(ProductColorSize::class,'product_id');
     }
-    public function productDetails()
+    public function brand()
     {
-        return $this->hasMany(ProductDetail::class,'product_id','id');
+        return $this->belongsTo(Brand::class);
+    }
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+    public function ProductOtherInfos()
+    {
+        return $this->hasMany(ProductOtherInfo::class,'product_id','id');
     }
     public function productColor()
     {
@@ -32,6 +44,15 @@ class Product extends Model
     public function productSize()
     {
         return $this->hasMany(ProductSize::class,'product_id');
+    }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class,'order_product');
+    }
+
+    public function banner()
+    {
+        return $this->hasOne(Banner::class);
     }
 
 }

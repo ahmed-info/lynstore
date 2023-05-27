@@ -26,7 +26,12 @@
                 <th class="">link</th>
                 <th class="">title en</th>
                 <th class="">title ar</th>
-                <th class="">alt</th>
+                <th class="">Expire banner</th>
+                <th class="">discount Percentage</th>
+                <th class="">discount amount</th>
+                <th class="">brand</th>
+                <th class="">category</th>
+                <th class="">product</th>
                 <th class="">status</th>
                 <th class="">Action</th>
               </tr>
@@ -38,9 +43,26 @@
                             <th scope="">{{$index +1}}</th>
                             <td><img src={{  asset('images' ).'/'.$banner->image}} style="width: 100px" class="img-thumbnail" alt=""></td>
                             <td>{{$banner->link}}</td>
-                            <td>{{$banner->title_en}}</td>
-                            <td>{{$banner->title_ar}}</td>
-                            <td>{{$banner->alt}}</td>
+                            <td>{{ $banner->title_en }}</td>
+                            <td>{{ $banner->title_ar }}</td>
+                            <td>{{$banner->expireBanner != ''? $banner->expireBanner: '-'}}</td>
+                            <td>{{$banner->discountPercentage}}</td>
+                            <td>{{$banner->discountAmount}}</td>
+                            <td>
+                                {{optional($banner->brand)->title_en}}
+                            </td>
+                            <td>
+                                {{ optional($banner->category)->title_en }}
+
+                            </td>
+                            <td>
+
+                                {{ optional($banner->product)->title_en }}
+
+
+                            </td>
+
+
                             <td>{{$banner->status== "1"? "Active":"Inactive"}}</td>
                             <td>
 

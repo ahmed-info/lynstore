@@ -42,7 +42,7 @@
                  </li>
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                         <img src="{{ asset('adminassets/img/avatars/6.jpg') }}" class="img-avatar" alt="admin@bootstrapmaster.com">
+                         <img src="{{ asset('adminassets/img/avatars/logo.png') }}" class="img-avatar" alt="admin@bootstrapmaster.com">
                          <span class="hidden-md-down">language</span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-right">
@@ -95,7 +95,7 @@
                     <a class="nav-link" href="{{ route('dashboard.products.list') }}"><i class="icon-puzzle"></i>@lang('words.products')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard.productDetails.list') }}"><i class="icon-puzzle"></i>@lang('words.productDetails')</a>
+                    <a class="nav-link" href="{{ route('dashboard.productOtherInfos.list') }}"><i class="icon-puzzle"></i>@lang('words.product other info')</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.colors.list') }}"><i class="icon-puzzle"></i>@lang('words.productColors')</a>
@@ -109,53 +109,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard.banners.list') }}"><i class="icon-puzzle"></i>@lang('words.banners')</a>
                 </li>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> @lang('words.Orders')</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard.orders.list') }}"><i class="icon-puzzle"></i>@lang('words.pendingOrders')</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashborad.orders.AllOrders') }}" target="_top"><i class="icon-star"></i> @lang('words.All Orders')</a>
+                        </li>
+                    </ul>
+                </li>
 
-                 <li class="nav-title">
-                    test3
-                 </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{{ route('dashboard.settings') }}""><i class="icon-people"></i>@lang('words.settings')</a>
-                     <a class="nav-link" href="#"><i class="icon-docs"></i>  test4</a>
-                 </li>
-
-
-                 <li class="nav-item nav-dropdown">
-                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
-                     <ul class="nav-dropdown-items">
-                         <li class="nav-item">
-                             <a class="nav-link" href="icons-font-awesome.html"><i class="icon-star"></i> Font Awesome</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="icons-simple-line-icons.html"><i class="icon-star"></i> Simple Line Icons</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets <span class="tag tag-info">NEW</span></a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Charts</a>
-                 </li>
-                 <li class="divider"></li>
-                 <li class="nav-title">
-                     Extras
-                 </li>
-                 <li class="nav-item nav-dropdown">
-                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
-                     <ul class="nav-dropdown-items">
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-login.html" target="_top"><i class="icon-star"></i> Login</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-register.html" target="_top"><i class="icon-star"></i> Register</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error 404</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-500.html" target="_top"><i class="icon-star"></i> Error 500</a>
-                         </li>
-                     </ul>
+                     <a class="nav-link" href="{{ route('dashboard.settings') }}"><i class="icon-people"></i>@lang('words.settings')</a>
                  </li>
 
              </ul>

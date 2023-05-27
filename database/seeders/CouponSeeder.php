@@ -26,7 +26,8 @@ class CouponSeeder extends Seeder
             'status'=>'1',
             'start_date'=>Carbon::now(),
             'expire_date'=>Carbon::now()->addMonth(),
-            'graeter_than'=>600
+            'graeter_than'=>600,
+            'created_at'=> new Carbon(),
         ]);
 
         DB::table('coupons')->insert([
@@ -40,6 +41,7 @@ class CouponSeeder extends Seeder
             'start_date'=>Carbon::now(),
             'expire_date'=>Carbon::now()->addWeek(),
             'graeter_than'=>null,
+            'created_at'=> new Carbon(),
 
         ]);
     }

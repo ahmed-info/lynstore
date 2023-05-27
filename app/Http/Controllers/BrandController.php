@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Image;
 class BrandController extends Controller
 {
@@ -13,7 +15,6 @@ class BrandController extends Controller
     {
         $brands = Brand::all();
         return view('pages.brand.list',compact('brands'));
-
     }
     /**
      * Display a listing of the resource.
@@ -83,7 +84,12 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        //
+        $maincategories = Category::select('id','title_en','title_ar','image')->where('parent_id',0)->orWhere('parent_id',null)->get();
+        $subcategories = Category::select('parent_id','title_en','title_ar','image')->where('parent_id','<>',0)->orderBy('parent_id','asc')->get();
+        $brand = Brand::find($id);
+        $brands = Brand::all();
+
+        return view('brand.show', compact('maincategories', 'subcategories','brand', 'brands'));
     }
 
     /**
@@ -94,6 +100,7 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
+
         $brand = Brand::find($id);
         return view('pages.brand.edit', compact('brand'));
     }

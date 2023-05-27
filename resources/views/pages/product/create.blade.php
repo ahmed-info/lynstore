@@ -16,7 +16,7 @@
                             <h6>Select Supplier</h6>
                         </label>
 
-                        <select name="supplier_id" id="supplier_id" class="form-control">
+                        <select name="supplier_id" id="supplier_id" class="form-control" >
                             <option value="">Suppliers</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}"
@@ -25,6 +25,11 @@
                                 </option>
                             @endforeach
                         </select>
+
+                        @error('supplier_id')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
                     </div>
                     <div class="form-group">
                         <label for="color_id">
@@ -56,6 +61,10 @@
                                     {{ $category->{'title_' . app()->getLocale()} }}</option>
                             @endforeach
                         </select>
+
+                        @error('category_id')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -69,6 +78,11 @@
                                     {{ $brand->{'title_' . app()->getLocale()} }}</option>
                             @endforeach
                         </select>
+
+                        @error('brand_id')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="row">
@@ -256,6 +270,18 @@
                             <input type="number" step="0.01" class="form-control" id="mainPriceDiscount" name="mainPriceDiscount" value="{{ old('mainPriceDiscount') }}"
                                 placeholder="Enter Price Discount">
                             @error('mainPriceDiscount')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 mt-3">
+                        <div class="form-group mb-5">
+                            <label for="mainPriceDiscount">
+                                <h4>Origin Country</h4>
+                            </label>
+                            <input type="text"  class="form-control" id="originCountry" name="originCountry" value="{{ old('originCountry') }}"
+                                placeholder="Enter Origin Country">
+                            @error('originCountry')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

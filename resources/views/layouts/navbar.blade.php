@@ -6,7 +6,7 @@
 
     <div class="navbar-header">
         <a class="navbar-brand" href="#">
-            <img class="logo" src="images/logolyn.png"/>
+            <img class="logo" src="{{ asset('images'.'/'.$setting->logo) }}"/>
         </a>
     </div>
 
@@ -17,7 +17,7 @@
                 <a class="nav-link btn-lang text-white me-2" href="{{ route('languageConverter','ar') }}">AR</a>
                 @foreach ($maincategories as $maincategory)
                 <li class="nav-item dropdown">
-                    <a class="nav-link border-bottom" href="#" id="navbarLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    <a class="nav-link border-bottom" href="{{ route('category.show',['id'=>$maincategory->id]) }}" id="navbarLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         {{ $maincategory->{'title_'.app()->getLocale()} }}
                     </a>
 
@@ -29,10 +29,11 @@
                                     <a class="dropdown-item border-bottom" href="#">@lang('words.SHOP BY CATEGORY')</a>
                                   </li>
 
-                                  @foreach ($subcategories as $subcategory)
+                                  @foreach ($subcategories as $ind=> $subcategory)
                                 @if ($subcategory->parent_id == $maincategory->id)
+
                                 <li style="text-align: {{ app()->getLocale() == 'en' ? 'left' : 'right' }}">
-                                    <a class="dropdown-item border-bottom" href="#">{{ $subcategory->{'title_'.app()->getLocale()} }}</a>
+                                    <a class="dropdown-item border-bottom" href="{{ route('category.show',['id'=>$subcategory->id]) }}">{{ $subcategory->{'title_'.app()->getLocale()} }}</a>
                                   </li>
                                 @endif
                                 @endforeach
@@ -44,10 +45,14 @@
                                   </li>
 
                                 <li style="text-align: {{ app()->getLocale() == 'en' ? 'left' : 'right' }}">
-                                    <a class="dropdown-item border-bottom" href="#">Benefit</a>
-                                    <a class="dropdown-item border-bottom" href="#">Maybelline</a>
-                                    <a class="dropdown-item border-bottom" href="#">Ordinary</a>
-                                    <a class="dropdown-item border-bottom" href="#">Sheglam</a>
+                                    @if(count($brands) > 0)
+                                    @foreach ( $brands as $brand)
+                                    <a class="dropdown-item border-bottom" href="{{ route('brand.show',['id'=>$brand->id]) }}">{{ $brand->{'title_'.app()->getLocale()} }}</a>
+
+                                    @endforeach
+
+                                    @endif
+
                                   </li>
                             </ul>
 
@@ -77,9 +82,11 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li>
-                    <a class="dropdown-item fs-6" href="#">Action</a>
-                    <a class="dropdown-item fs-6" href="#">Another action</a>
-                    <a class="dropdown-item fs-6" href="#">Something else here</a>
+                    @foreach ($maincategories as $maincategory)
+                    <a class="dropdown-item fs-6" href="#">{{ $maincategory->{'title_'.app()->getLocale()} }}</a>
+                    @endforeach
+
+
                 </li>
             </ul>
             </li>
@@ -88,24 +95,12 @@
 {{-- start favorite --}}
 <div class="d-flex">
 <div class="d-flex ">
-    <div class="">
+    <a href="{{ route('addToWishlist') }}" class="">
         <img src="{{ asset('assets/icons/user.svg') }}" alt="user" class="iconImg" height="25" width="25">
-    </div>
-</div>
-<div class="d-flex ms-4 me-4">
-    <a class="wishlistlink" href="/wishlist">
-        <div class="">
-            <img src="{{ asset('assets/icons/wishlist.svg') }}" alt="wishList" height="25" width="25">
-        </div>
     </a>
 </div>
-<div class="d-flex">
-    <a href="/bag">
-        <div class="">
-            <img src="{{ asset('assets/icons/bag.svg') }}" alt="bag" height="25" width="25">
-        </div>
-    </a>
-</div>
+{{-- livewire cart --}}
+<livewire:carts>
 </div>
 
 {{-- end favorite --}}

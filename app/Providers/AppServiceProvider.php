@@ -31,7 +31,10 @@ class AppServiceProvider extends ServiceProvider
                     'whatsapp'=>'https://api.whatsapp.com/send/?phone=%2B9647509713041&text&type=phone_number&app_absent=0',
                     'instagram'=>'https://www.instagram.com/lyn.company_/?igshid=YmMyMTA2M2Y%3D',
                     'facebook'=>'https://www.facebook.com/people/Lyn-company/100090402375756/?mibextid=LQQJ4d',
-                    'tiktok'=>'https://www.tiktok.com/@lyn_shpping?_t=8awKLoMNHnx&_r=1'
+                    'tiktok'=>'https://www.tiktok.com/@lyn_shpping?_t=8awKLoMNHnx&_r=1',
+                    'youtube'=>'',
+                    'logo'=>'',
+                    'exchange_rate'=>'1320'
                 ]);
             });
 

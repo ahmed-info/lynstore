@@ -5,7 +5,7 @@
       <!-- Left -->
       <div class="me-5 d-none d-lg-block">
         <span>@lang('words.Get connected with us on social networks')</span>
-        
+
       </div>
       <!-- Left -->
 
@@ -83,7 +83,7 @@
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <h6 class="text-uppercase fw-bold mb-4">@lang('words.Contact Us')</h6>
             <p>
               <i class="fas fa-envelope me-3"></i>
               info@example.com

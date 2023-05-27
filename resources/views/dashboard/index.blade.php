@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.layout')
 @section('body')
          <!-- Breadcrumb -->
-         <ol class="breadcrumb">
+         {{-- <ol class="breadcrumb">
             <li class="breadcrumb-item">خانه</li>
             <li class="breadcrumb-item"><a href="#">مدیریت</a>
             </li>
@@ -15,13 +15,13 @@
                     <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;تنظیمات</a>
                 </div>
             </li>
-        </ol>
+        </ol> --}}
 
         <div class="container-fluid">
 
             <div class="animated fadeIn">
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3">
+                    {{-- <div class="col-sm-6 col-lg-3">
                         <div class="card card-inverse card-primary">
                             <div class="card-block p-b-0">
                                 <div class="btn-group pull-left">
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--/col-->
+                    <!--/col--> --}}
 
                 </div>
                 <!--/row-->

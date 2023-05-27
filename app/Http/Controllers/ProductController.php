@@ -9,7 +9,10 @@ use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\Color;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -72,11 +75,11 @@ class ProductController extends Controller
             'selectForYou' => 'nullable|boolean:0,1,true,false',
             'description_en'=>'nullable|string',
             'description_ar'=>'nullable|string',
-            'brand_id'=>'nullable|numeric',
+            'brand_id'=>'required|numeric',
             'capacity'=>'nullable|string',
             'unit'=>'nullable|string',
             'quantity'=>'nullable|numeric',
-            'supplier_id'=>'nullable|numeric',
+            'supplier_id'=>'required|numeric',
             'deliveryTime'=>'nullable|string',
             'sku'=>'nullable|string',
             'barcode'=>'nullable|string',
@@ -142,6 +145,7 @@ class ProductController extends Controller
          $product->deliveryTime= $request->deliveryTime;
          $product->sku= $request->sku;
          $product->barcode= $request->barcode;
+         $product->originCountry= $request->originCountry;
          $product->mainPrice= $request->mainPrice;
          $product->mainPriceDiscount= $request->mainPriceDiscount;
          $product->category_id= $request->category_id;
@@ -305,6 +309,7 @@ class ProductController extends Controller
          $product->deliveryTime= $request->deliveryTime;
          $product->sku= $request->sku;
          $product->barcode= $request->barcode;
+         $product->originCountry= $request->originCountry;
          $product->mainPrice= $request->mainPrice;
          $product->mainPriceDiscount= $request->mainPriceDiscount;
          $product->category_id= $request->category_id;
@@ -347,5 +352,29 @@ class ProductController extends Controller
         }
         $product->delete();
         return redirect()->route('dashboard.products.list')->with('status','Product Deleted Successfully');
+    }
+
+    public function update_Wishlist(Request $request)
+    {
+
+        //return $countWishlist;
+        if($request->ajax()){
+            $data = $request->all();
+            $countWishlist = Wishlist::countWishlist($data['product_id']);
+            print_r($data);
+
+            $wishlist = new Wishlist;
+            if($countWishlist ==0){
+                $wishlist->product_id = $data['product_id'];
+                $wishlist->user_id = $data['user_id'];
+                $wishlist->save();
+                return response()->json(['action'=>'add','status'=>'product added to wishlist successfully','status'=>'product added successfully']);
+            }else{
+                $wish = Wishlist::where(['user_id' =>Auth::id(),'product_id'=>$data['product_id']]);
+                $wish->delete();
+                return response()->json(['action'=>'remove','status'=>'product remove from wishlist successfully','status'=>'product added successfully']);
+
+            }
+        }
     }
 }

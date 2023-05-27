@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Models\Banner;
+use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Category;
 use Image;
 class BannerController extends Controller
 {
@@ -31,7 +34,10 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('pages.banner.create');
+        $categories = Category::where('parent_id','<>',0)->orWhere('parent_id','<>',null)->get();
+        $brands = Brand::all();
+        $products = Product::all();
+        return view('pages.banner.create',compact('categories','brands','products'));
     }
 
     /**
@@ -47,8 +53,13 @@ class BannerController extends Controller
             'title_en'=>'nullable',
             'title_ar'=>'nullable',
             'link'=>'required',
-            'alt'=>'nullable',
             'status'=>'required',
+            'expireBanner'=>'date',
+            'discountPercentage'=>'nullable|integer|min:0|max:100',
+            'discountAmount'=>'nullable|integer',
+            'product_id'=>'nullable',
+            'brand_id'=>'nullable',
+            'category_id'=>'nullable'
           ]);
           $banner = new Banner;
          //image
@@ -63,8 +74,13 @@ class BannerController extends Controller
          $banner->title_en = $request->title_en;
          $banner->title_ar = $request->title_ar;
          $banner->link = $request->link;
-         $banner->alt = $request->alt;
          $banner->status = $request->status;
+         $banner->expireBanner = $request->expireBanner;
+         $banner->discountPercentage = $request->discountPercentage;
+         $banner->discountAmount = $request->discountAmount;
+         $banner->product_id = $request->product_id;
+         $banner->brand_id = $request->brand_id;
+         $banner->category_id = $request->category_id;
          $banner->save();
          return redirect()->route('dashboard.banners.list')->with('status', "banner created successfully");
 
@@ -90,7 +106,10 @@ class BannerController extends Controller
     public function edit($id)
     {
         $banner = Banner::find($id);
-        return view('pages.banner.edit', compact('banner'));
+        $categories = Category::where('parent_id','<>',0)->orWhere('parent_id','<>',null)->get();
+        $brands = Brand::all();
+        $products = Product::all();
+        return view('pages.banner.edit', compact('banner','categories','brands','products'));
     }
 
     /**
@@ -103,12 +122,17 @@ class BannerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'title_en'=>'nullable',
             'title_ar'=>'nullable',
             'link'=>'required',
-            'alt'=>'nullable',
             'status'=>'required',
+            'expireBanner'=>'date',
+            'discountPercentage'=>'nullable|integer|min:0|max:100',
+            'discountAmount'=>'nullable|integer',
+            'product_id'=>'nullable',
+            'brand_id'=>'nullable',
+            'category_id'=>'nullable'
           ]);
           $banner = Banner::find($id);
          //image
@@ -128,8 +152,13 @@ class BannerController extends Controller
          $banner->title_en = $request->title_en;
          $banner->title_ar = $request->title_ar;
          $banner->link = $request->link;
-         $banner->alt = $request->alt;
          $banner->status = $request->status;
+         $banner->expireBanner = $request->expireBanner;
+         $banner->discountPercentage = $request->discountPercentage;
+        $banner->discountAmount = $request->discountAmount;
+        $banner->product_id = $request->product_id;
+        $banner->brand_id = $request->brand_id;
+        $banner->category_id = $request->category_id;
          $banner->update();
          return redirect()->route('dashboard.banners.list')->with('status', "banner updated successfully");
     }
